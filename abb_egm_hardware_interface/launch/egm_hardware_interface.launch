@@ -4,6 +4,10 @@
   <arg name="egm_config_file"  default="$(find abb_egm_hardware_interface)/config/egm_single_mech_unit_example.yaml" doc="EGM related configurations"/>
   <arg name="output"           default="log"                                                                         doc="Specifies where the stdout/stderr streams are directed (i.e. 'log' or 'screen')"/>
 
+
+  <!-- MODIFIED  -->
+  <remap from="/yumi/egm/joint_states" to="/joint_states" />
+
   <node pkg="abb_egm_hardware_interface" type="egm_hardware_interface" name="egm_hardware_interface" output="$(arg output)">
     <rosparam file="$(arg base_config_file)" command="load"/>
     <rosparam file="$(arg egm_config_file)" command="load"/>

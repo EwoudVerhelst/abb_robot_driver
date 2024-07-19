@@ -44,11 +44,13 @@
     <!-- Put 'ros_control' components in the "egm" namespace (to match the hardware interface) -->
     <group ns="egm">
       <!-- Load configurations for 'ros_control' controllers on the parameter server -->
+      <param name="robot_description" command="cat $(find yumi_description)/urdf/yumi.urdf"/>
       <rosparam file="$(find abb_robot_bringup_examples)/config/ex3_controllers.yaml" command="load"/>
 
       <!-- Two 'ros_control' controller spawners (stopped for the controller that command motions) -->
       <node pkg="controller_manager" type="spawner" name="started" args="egm_state_controller joint_state_controller"/>
-      <node pkg="controller_manager" type="spawner" name="stopped" args="--stopped joint_group_velocity_controller"/>
+      <node pkg="controller_manager" type="spawner" name="stopped" args="--stopped joint_traj_vel_controller_l joint_traj_vel_controller_r"/>
+
     </group>
   </group>
 </launch>
